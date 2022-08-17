@@ -1,26 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct real{
+typedef struct{
 	int num;
 	int den;
-};
+}real;
 
 void entry(real *out);
 void show(real *out);
+int realempt(real *num);
 void realadd(real *num1, real *num2);
 void realsub(real *num1, real *num2);
 void realmult(real *num1, real *num2);
 void realdiv(real *num1, real *num2);
+void realcpy(real *num1, real *num2);
+void gaussjordan(real *matrix, int offset, int var);
 
 int main(int argv, const char argc[]){
 	int offset = 0, var = 0;
+	
 	printf("Algoritmo Gauss-Jordan\n");
 	printf("Recuerda que la cantidad de variables es igual a la cantidad de ecuaciones que se proporcionara\n");
 	printf("ingresa la cantidad de variables: ");
 	scanf("%d",&var);
+	
 	offset = var+1;
-	real *syst = malloc(sizeof(struct real)*(var*offset));
+	real *syst = malloc(sizeof(real)*(var*offset));
+	
 	for(int i = 0; i < var; i++){
 		for(int j = 0; j < offset; j++){
 			if(j==offset-1){
@@ -33,6 +39,7 @@ int main(int argv, const char argc[]){
 			}
 		}
 	}
+
 	for(int i = 0; i < var; i++){
 		for(int j = 0; j < offset; j++){
 			printf("| ");
@@ -40,6 +47,8 @@ int main(int argv, const char argc[]){
 		}
 		printf("\n");
 	}
+
+	gaussjordan(syst, offset, var);
 }
 
 void entry(real *out){
@@ -87,4 +96,26 @@ void realmult(real *num1, real *num2){
 void realdiv(real *num1, real *num2){
 	num1->num=num1->num*num2->den;
 	num1->den=num1->den*num2->num;
+}
+
+int realempt(real *num){
+	if(num->num == 0) return 0;
+	else return 1;
+}
+
+void realcpy(real *num1, real *num2){
+	num1->num=num2->num;
+	num1->den=num2->den;
+}
+
+void gaussjordan(real *matrix, int offset, int var){
+	real plh;
+	for(int i = 0; i < offset; i++){
+		for(int j = 0; j < var; j++){
+			if(realempt(&matrix[j+])){}
+		}
+		for(int j = 0; j < var; j++){
+
+		}
+	}
 }
