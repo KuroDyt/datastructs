@@ -9,6 +9,7 @@ typedef struct{
 void entry(real *out);
 void show(real *out);
 int realempt(real *num);
+int realcmp(real *num1, real *num2);
 void realadd(real *num1, real *num2);
 void realsub(real *num1, real *num2);
 void realmult(real *num1, real *num2);
@@ -108,14 +109,23 @@ void realcpy(real *num1, real *num2){
 	num1->den=num2->den;
 }
 
+int realcmp(real *num1, real *num2){
+	if
+}
+
 void gaussjordan(real *matrix, int offset, int var){
-	real plh;
+	real plh1;
+	real plh2;
 	for(int i = 0; i < offset; i++){
-		for(int j = 0; j < var; j++){
-			if(realempt(&matrix[j+])){}
+		for(int j = 0; j < offset; j++){
+			if(realempt(&matrix[i+(j*offset)])){
+				realcpy(&plh1, &matrix[i+(j*offset)]);
+				realcpy(&plh2, &plh1);
+				break;
+			}
 		}
 		for(int j = 0; j < var; j++){
-
+			l
 		}
 	}
 }
