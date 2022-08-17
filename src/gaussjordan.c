@@ -1,13 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct real{
+typedef struct real{
 	int num;
 	int den;
 };
 
-void entry(struct real *out);
-void show(struct real *out);
+void entry(real *out);
+void show(real *out);
+void realadd(real *num1, real *num2);
+void realsub(real *num1, real *num2);
+void realmult(real *num1, real *num2);
+void realdiv(real *num1, real *num2);
 
 int main(int argv, const char argc[]){
 	int offset = 0, var = 0;
@@ -16,7 +20,7 @@ int main(int argv, const char argc[]){
 	printf("ingresa la cantidad de variables: ");
 	scanf("%d",&var);
 	offset = var+1;
-	struct real *syst = malloc(sizeof(struct real)*(var*offset));
+	real *syst = malloc(sizeof(struct real)*(var*offset));
 	for(int i = 0; i < var; i++){
 		for(int j = 0; j < offset; j++){
 			if(j==offset-1){
@@ -38,19 +42,49 @@ int main(int argv, const char argc[]){
 	}
 }
 
-void entry(struct real *out){
+void entry(real *out){
+	int den = 0;
 	char *ent = malloc(sizeof(char)*10), *end;
 	scanf("%s", ent);
 	out->num=strtol(ent, &end, 10);
-	out->den=strtol(end+1, &end, 10);
+	den=strtol(end+1, &end, 10);
+	if(den == 0) out->den=1;
+	else out->den=den;
 	free(ent);
 }
 
-void show(struct real *out){
+void show(real *out){
 	if((out->den) == 1){
 		printf("%d ", out->num);
 	}
 	else{
 		printf("%d/%d ", out->num, out->den);
 	}
+}
+
+void realadd(real *num1, real *num2){
+	if(num1->den == num2->den) num1->num=num1->num + num2->num;
+	else{
+		num1->num=(num1->num*num2->den)+(num2->num*num1->den);
+		num1->den=(num1->den*num2->den);
+	}
+}
+
+void realsub(real *num1, real *num2){
+	if(num1->den == num2->den) num1->num=num1->num - num2->num;
+	else{
+		num1->num=(num1->num*num2->den)-(num2->num*num1->den);
+		num1->den=(num1->den*num2->den);
+	}
+
+}
+
+void realmult(real *num1, real *num2){
+	num1->num=num1->num*num2->num;
+	num1->den=num1->den*num2->den;
+}
+
+void realdiv(real *num1, real *num2){
+	num1->num=num1->num*num2->den;
+	num1->den=num1->den*num2->num;
 }
