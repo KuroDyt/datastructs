@@ -12,5 +12,7 @@ int main(int argc, char *argv[]){
 
 	printf("%d , %p\n",*iptr, iptr);
 
+	free(iptr);
+
 	return 0;
 }
